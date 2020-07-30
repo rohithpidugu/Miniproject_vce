@@ -1,7 +1,5 @@
-import React from 'react';
+import React from "react";
 
-export function SignUp(){
-    return(
-        <h1>implement signup page using material-ui or bootstrap</h1>
-    )
+export function SignUp() {
+  return <h5>implement signup page using material-ui or bootstrap</h5>;
 }

@@ -2,16 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import AuthReducer from "./store/reducers/Auth.js";
 import rootReducer from "./store/reducers/rootReducer.js";
+
+const combinedReducers = combineReducers({
+  Auth: AuthReducer,
+  images: rootReducer,
+});
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  rootReducer,
+  combinedReducers,
   composeEnhancers(applyMiddleware(ReduxThunk))
 );
 

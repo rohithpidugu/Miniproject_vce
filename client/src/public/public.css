@@ -1,0 +1,15 @@
+.containerAuthroutes {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 10%;
+}
+.switch-component {
+  text-align: center;
+}
+
+@media only screen and (min-width: 994px) {
+  .navbar > .navbar-collapse {
+    position: absolute;
+    right: 0px;
+  }
+}

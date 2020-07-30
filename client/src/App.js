@@ -1,10 +1,11 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { SignIn } from "./pages/SignIn";
-import { SignUp } from "./pages/SignUp";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Header from "./components/Header.js";
 import Home from "./pages/Home";
+import DashboardRoutes from "./pages/Authorizedpages/Routes";
+import { AuthorizedRoutes } from "./components/AuthorizedComponent";
 import "./App.css";
+import "./public/public.css";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
+        <AuthorizedRoutes exact component={DashboardRoutes} />
+        <Redirect to="/error" />
       </Switch>
     </div>
   );

@@ -1,7 +1,7 @@
 const initialState = {
-    orders: []
-  };
-  
-  export default (state = initialState, action) => {
-    return state;
-  };
+  images: [],
+};
+
+export default (state = initialState, action) => {
+  return state;
+};

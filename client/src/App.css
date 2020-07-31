@@ -36,6 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.bodypart {
+  min-height: 100vh;
+}
 
 .containerAuthroutes {
   display: grid;

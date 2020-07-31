@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import Home from "./pages/Home";
-import DashboardRoutes from "./pages/Authorizedpages/Routes";
+import AuthRoutes from "./pages/Authorizedpages/Routes";
 import { AuthorizedRoutes } from "./components/AuthorizedComponent";
 import "./App.css";
 import "./public/public.css";
@@ -15,7 +15,7 @@ function App() {
       <div className="bodypart">
         <Switch>
           <Route exact path="/" component={Home} />
-          <AuthorizedRoutes exact component={DashboardRoutes} />
+          <AuthorizedRoutes exact component={AuthRoutes} />
           <Redirect to="/error" />
         </Switch>
       </div>

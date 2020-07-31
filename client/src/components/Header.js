@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Toolbar from "../pages/Toolbar";
 const Header = () => {
   const auth = true;
@@ -9,9 +10,9 @@ const Header = () => {
         style={{ backgroundColor: "#e3f2fd" }}
       >
         <div className="">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             Palisade
-          </a>
+          </Link>
         </div>
         <button
           className="navbar-toggler"
@@ -29,32 +30,32 @@ const Header = () => {
             {auth ? (
               <>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    MyPosts
-                  </a>
+                  <Link className="nav-link" to="/posts">
+                    Posts
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/followingposts">
                     Followingposts
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/createpost">
                     UploadPost
-                  </a>
+                  </Link>
                 </li>
               </>
             ) : (
               <>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/login">
                     LogIn
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/signup">
                     Signup
-                  </a>
+                  </Link>
                 </li>
               </>
             )}

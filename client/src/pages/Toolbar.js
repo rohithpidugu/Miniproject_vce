@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -61,7 +62,9 @@ export default function Toolbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/profile">Profile</Link>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>LogOut</MenuItem>
     </Menu>
   );
@@ -81,7 +84,7 @@ export default function Toolbar() {
         <IconButton>
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to="/profile">Profile</Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <IconButton>

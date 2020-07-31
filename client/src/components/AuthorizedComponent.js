@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import AuthRoutes from "../AuthRoutes";
 
 export const AuthorizedRoutes = ({ component: Component, ...rest }) => {
-  const isAuthorized = false;
+  const isAuthorized = true;
   return (
     <Route
       {...rest}

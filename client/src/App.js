@@ -16,7 +16,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <AuthorizedRoutes exact component={AuthRoutes} />
-          <Redirect to="/error" />
         </Switch>
       </div>
       <Footer />

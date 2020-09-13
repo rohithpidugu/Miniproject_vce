@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import {useDispatch} from "react-redux";
+import * as authLogin from "../store/actions/authactions"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Toolbar() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -51,6 +55,11 @@ export default function Toolbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+ const logoutUser=()=>{
+    dispatch(authLogin.logout());
+    history.push('/login')
+  }
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -65,7 +74,7 @@ export default function Toolbar() {
       <MenuItem onClick={handleMenuClose}>
         <Link to="/profile">Profile</Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>LogOut</MenuItem>
+      <MenuItem onClick={logoutUser}>LogOut</MenuItem>
     </Menu>
   );
 
@@ -86,7 +95,7 @@ export default function Toolbar() {
         </IconButton>
         <Link to="/profile">Profile</Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={logoutUser}>
         <IconButton>
           <AccountCircle />
         </IconButton>
@@ -106,10 +115,11 @@ export default function Toolbar() {
           onClick={handleProfileMenuOpen}
           color="inherit"
         >
-          <AccountCircle fontSize="large" />
+          <AccountCircle fontSize="large" color="action"/>
         </IconButton>
       </div>
-      <div className={classes.sectionMobile}>
+      {renderMenu}
+      {/* <div className={classes.sectionMobile}>
         <IconButton
           aria-label="show more"
           aria-controls={mobileMenuId}
@@ -120,8 +130,7 @@ export default function Toolbar() {
           <MoreIcon />
         </IconButton>
       </div>
-      {renderMobileMenu}
-      {renderMenu}
+      {renderMobileMenu} */}
     </div>
   );
 }

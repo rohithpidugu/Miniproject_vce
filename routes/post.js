@@ -60,7 +60,7 @@ router.get('/mypost',requireLogin,(req,res)=>{
     })
 })
 
-router.put('unlike',requireLogin,(req,res)=>{
+router.put('/unlike',requireLogin,(req,res)=>{
     Post.findByIdAndUpdate(req.body.postId,{
         $pull:{likes:req.user._id}
     },{

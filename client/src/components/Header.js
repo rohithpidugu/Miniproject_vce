@@ -1,34 +1,83 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import {useSelector,useDispatch} from "react-redux";
+import { Link,useHistory } from "react-router-dom";
 import Toolbar from "../pages/Toolbar";
+import Myprofile from "./Myprofile";
+import * as authLogin from "../store/actions/authactions"
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+
 const Header = () => {
-  const auth = true;
+  const dispatch=useDispatch()
+  const history=useHistory();
+  const auth = useSelector(state => state.Auth.user)!=null?true:false;
+  const logoutUser=()=>{
+    dispatch(authLogin.logout());
+    history.push('/')
+  }
+  useEffect(()=>{
+    const M = window.M;
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, {draggable:true,edge:"left"});
+    },[]);
+  })
   return (
-    <div style={{ display: "inline" }}>
-      <nav
-        className="navbar sticky-top navbar-expand-lg navbar-light"
-        style={{ backgroundColor: "#e3f2fd" }}
-      >
-        <div className="">
-          <Link className="navbar-brand" to="/">
-            Palisade
-          </Link>
-        </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            {auth ? (
+    <div>
+    <nav>
+    <div className="nav-wrapper" style={{ backgroundColor: "#e3f2fd" }}>
+    <a href="#" data-target="slide-out" className="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <Link to="/" className="brand-logo">Palisade</Link>
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
+      {auth ? (
               <>
+                <li>
+                  <Link to="/posts">
+                    Posts
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/followingposts">
+                    Followingposts
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/createpost">
+                    UploadPost
+                  </Link>
+                </li>
+                <li style={{marginTop:"6px"}}>
+                  <Link to="/join">
+                    <QuestionAnswerIcon fontSize="large" color="action"/>
+                  </Link>
+                </li>
+                <li> 
+                  <Toolbar />
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">
+                    LogIn
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/signup">
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
+      </ul>
+    </div>
+  </nav>
+  <ul id="slide-out" className="sidenav" style={{ backgroundColor: "#e3f2fd" }}>
+    {auth ? (
+              <div style={{marginTop:"20px"}}>
+                <li><div className="user-view">
+                  <Myprofile />
+                </div></li>
+                <li><div className="divider"></div></li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/posts">
                     Posts
@@ -44,9 +93,19 @@ const Header = () => {
                     UploadPost
                   </Link>
                 </li>
-              </>
+                <li>
+                  <Link to="/join">
+                    <QuestionAnswerIcon fontSize="large" color="action"/>chat
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button class="btn waves-effect waves-light" onClick={logoutUser}>
+                    Logout
+                  </button>
+                </li>
+              </div>
             ) : (
-              <>
+              <div style={{marginTop:"20px"}}>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
                     LogIn
@@ -57,13 +116,12 @@ const Header = () => {
                     Signup
                   </Link>
                 </li>
-              </>
+              </div>
             )}
-          </ul>
-        </div>
-      </nav>
-      {auth ? <Toolbar /> : null}
-    </div>
+  </ul>
+  </div>
   );
-};
+}
+
+  
 export default Header;
